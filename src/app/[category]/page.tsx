@@ -1,43 +1,46 @@
-import React from "react";
-import { PiShoppingCartSimpleLight } from "react-icons/pi";
-import Link from "next/link";
-import { simplifiedProduct } from "../interface";
 import { client, urlFor } from "../lib/sanity";
+import { simplifiedProduct } from "../interface";
+import  Link from "next/link";
 import Image from "next/image";
 
-async function getData() {
-  const Query = `*[_type == "product"][0...4] | order(_createdAt desc) { 
-  _id,
-    price, 
-    name,
-    "slug": slug.current,
-    "categoryName": category->name,
-    titleImage,
-    }`;
+async function getData (category: string) {
+    const Query =`*[_type == "product" && category->name == "${category}"]{
+    _id, 
+     images,
+     price,
+     name,
+     "slug": slug.current,
+     "categoryName": category->name,
+ }`;
 
-  const data = await client.fetch(Query);
-  return data;
+ const data = await client.fetch(Query)
+ return data;
+
 }
-export default async function Featuredproduct() {
-  const data: simplifiedProduct[] = await getData();
 
-  return (
-    <div className="bg-white">
-      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+
+export default async function CategoryPage({params}: {params: {category: string}}) {
+
+    const data: simplifiedProduct[] = await getData(params.category);
+
+    return (
+      <div className="bg-white">
+      <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="flex justify-between items-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900">
-            Featured Products
+          <h2 className="text-2xl font-bold tracking-tight text-gray-900">
+            Our Products for {params.category}
           </h2>
         </div>
 
         {/* product */}
+
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {data.map((product) => (
             <div key={product._id} className="group relative">
               <div className="aspect-square w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-80">
                 <Image
                   src={urlFor(product.titleImage).url()}
-                  alt="product Images"
+                  alt="product image"
                   width={300}
                   height={300}
                   className="w-full h-full object-cover object-center lg:h-full lg:w-full"
@@ -46,7 +49,7 @@ export default async function Featuredproduct() {
 
               {/* product detail*/}
 
-              <div className="mt-4 ">
+              <div className="mt-4 flex justify-between">
                 <div>
                   <h3 className="text-sm text-gray-700">
                     <Link href={`/product/${product.slug}`}>
@@ -61,18 +64,13 @@ export default async function Featuredproduct() {
 
                 {/* price */}
 
-                <p className="mt-1 text-sm font-medium text-gray-900">
-                  ${product.price}
-                </p>
+                <p className="text-sm font-medium text-gray-900">${product.price}</p>
 
-                <div className="w-[44px] h-[44px] bg-gray-200  rounded-[8px] relative left-[400px] md:left-[235px] bottom-[35px] p-2">
-                  <PiShoppingCartSimpleLight className="w-[24px] h-[24px]" />
-                </div>
               </div>
             </div>
           ))}
         </div>
       </div>
     </div>
-  );
+    );
 }

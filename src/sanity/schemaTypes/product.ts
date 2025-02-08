@@ -9,12 +9,14 @@ export default {
       title: "Name of product",
     },
 
-    {
-      name: "titleImage",
-      type: "image",
-      title: "Title Image",
-    },
-
+    
+      {
+        name: "titleImage",
+        type: "image",
+        title: "Title Image",
+      },
+  
+   
     {
       name: "description",
       type: "text",

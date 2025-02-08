@@ -6,9 +6,13 @@ import { FaCheck, FaBars } from "react-icons/fa";
 import { CiCircleAlert } from "react-icons/ci";
 import { ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useShoppingCart } from "use-shopping-cart";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // import hook
+  const {handleCartClick} = useShoppingCart();
 
   return (
     <div className="">
@@ -46,6 +50,7 @@ export default function Navbar() {
           <div className="flex divide-x border-r sm:border-1 ml-64">
           <Button
             variant={"outline"}
+            onClick={() => handleCartClick()}
             className="flex flex-col gap-y-1.5 w-20 h-20 sm:h-20 sm:w-20 md:w-24 rounded-none"
           >
             <ShoppingBag />

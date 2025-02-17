@@ -2,7 +2,7 @@
 
 export interface simplifiedProduct {
     _id: string;
-   titleImage: string;
+   imageUrl: string;
     price: number;
     slug: string;
     categoryName: string;
@@ -14,7 +14,7 @@ export interface simplifiedProduct {
 export interface fullProduct {
 
     _id: string;
-    titleImage: string;
+    images: string;
     price: number;
     slug: string;
     categoryName: string;

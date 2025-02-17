@@ -2,7 +2,7 @@ import React from "react";
 import { PiShoppingCartSimpleLight } from "react-icons/pi";
 import Link from "next/link";
 import { simplifiedProduct } from "../interface";
-import { client, urlFor } from "../lib/sanity";
+import { client  } from "../lib/sanity";
 import Image from "next/image";
 
 async function getData() {
@@ -12,8 +12,8 @@ async function getData() {
     name,
     "slug": slug.current,
     "categoryName": category->name,
-    titleImage,
-    }`;
+    "imageUrl": images.asset->url,
+}`
 
   const data = await client.fetch(Query);
   return data;
@@ -36,7 +36,7 @@ export default async function Featuredproduct() {
             <div key={product._id} className="group relative">
               <div className="aspect-square w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-80">
                 <Image
-                  src={urlFor(product.titleImage).url()}
+                  src={product.imageUrl}
                   alt="product Images"
                   width={300}
                   height={300}
@@ -76,3 +76,5 @@ export default async function Featuredproduct() {
     </div>
   );
 }
+
+

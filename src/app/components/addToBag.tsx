@@ -1,21 +1,21 @@
-"use client";
+"use client"
 
 import { Button } from "@/components/ui/button";
 import { useShoppingCart } from "use-shopping-cart";
-import { urlFor } from "../lib/sanity";
+
 
 export interface ProductCart {
   name: string;
   description: string;
   price: number;
   currency: string;
-  image: string;
+  images: string;
 }
 
 export default function AddToBag({
   currency,
   description,
- image,
+ images,
   name,
   price,
 }: ProductCart) {
@@ -27,10 +27,13 @@ export default function AddToBag({
     description: description,
     price: price,
     currency: currency,
-    image: image,
-    id: "lopdfgy"
+    image: images,
+    id: "lsfhkn",
+    // id: name.replace(/\s+/g, "-").toLowerCase(),
+    
   };
   return (
+  
     <Button
       onClick={() => {
         addItem(product), handleCartClick();

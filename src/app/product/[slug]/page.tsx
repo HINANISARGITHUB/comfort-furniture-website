@@ -15,13 +15,14 @@ async function getData(slug: string) {
 
   const Query = `*[_type == "product" && slug.current == "${slug}"][0] {
   _id,
-    titleImage,
+    images,
     price,
     name,
     description,
     "slug": slug.current,
     "categoryName": category->name,
-    }`;
+   
+}`
 
   const data = await client.fetch(Query);
 
@@ -40,7 +41,7 @@ export default async function ProductPage({
         {/* imgesGallery */}
         <div className="relative overflow-hidden  ">
           <Image
-            src={urlFor(data.titleImage).url()}
+            src={urlFor(data.images).url()}
             alt="fashion photo"
             width={500}
             height={500}
@@ -64,8 +65,8 @@ export default async function ProductPage({
           {/* images botton with star*/}
 
           <div className="mb-6 flex items-center gap-3 md:mb-10">
-            <Button className="rounded-full gap-x-3">
-              <span className="text-sm">4.2</span>
+            <Button className="rounded-full gap-x-3 bg-teal-700">
+              <span className="text-sm ">4.2</span>
 
               {/* snametar icon */}
               <Star className="h-5 w-5" />
@@ -107,7 +108,7 @@ export default async function ProductPage({
             <AddToBag 
              currency="USD"
              description={data.description}
-             image={data.titleImage[0]}
+             images={data.images[0]}
              name={data.name}
              price={data.price}
              key={data._id}/>

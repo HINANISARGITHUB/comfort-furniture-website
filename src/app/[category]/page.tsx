@@ -1,22 +1,20 @@
-import { client, urlFor } from "../lib/sanity";
-import { simplifiedProduct } from "../interface";
-import  Link from "next/link";
-import Image from "next/image";
+ import { client, urlFor } from "../lib/sanity";
+ import { simplifiedProduct } from "../interface"; import  Link from "next/link";
+ import Image from "next/image";
 
-async function getData (category: string) {
-    const Query =`*[_type == "product" && category->name == "${category}"]{
-    _id, 
-     images,
-     price,
-     name,
-     "slug": slug.current,
-     "categoryName": category->name,
- }`;
+ async function getData (category: string) {
+     const Query =`*[_type == "product" && category->name == "${category}"]{
+     _id, 
+      "image": titleImage.asset->url,
+      price,/      name,
+      "slug": slug.current,
+      "categoryName": category->name,
+  }`;
 
- const data = await client.fetch(Query)
- return data;
+  const data = await client.fetch(Query)
+  return data;
 
-}
+ }
 
 
 export default async function CategoryPage({params}: {params: {category: string}}) {
@@ -39,7 +37,7 @@ export default async function CategoryPage({params}: {params: {category: string}
             <div key={product._id} className="group relative">
               <div className="aspect-square w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-80">
                 <Image
-                  src={urlFor(product.titleImage).url()}
+                  src={urlFor(product.image).url()}
                   alt="product image"
                   width={300}
                   height={300}

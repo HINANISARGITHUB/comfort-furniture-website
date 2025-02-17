@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Sheet,
@@ -9,11 +9,10 @@ import {
 import { useShoppingCart } from "use-shopping-cart";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { urlFor } from "../lib/sanity";
 
-export default function ShoppingCardModel() {
 
-    // hookProvider use shoppingcart package
+export default function ShoppingCartModal() {
+  // hookProvider use shoppingcart package
   const {
     cartCount,
     shouldDisplayCart,
@@ -21,33 +20,33 @@ export default function ShoppingCardModel() {
     cartDetails,
     removeItem,
     totalPrice,
-    
   } = useShoppingCart();
-  
+
   return (
     <Sheet open={shouldDisplayCart} onOpenChange={() => handleCartClick()}>
-    <SheetContent className="sm:max-w-lg w-[90vw]">
-      <SheetHeader>
-        <SheetTitle>Shopping Cart</SheetTitle>
-      </SheetHeader>
+      <SheetContent className="sm:max-w-lg w-[90vw]">
+        <SheetHeader>
+          <SheetTitle>Shopping Cart</SheetTitle>
+        </SheetHeader>
 
-      <div className="h-full flex flex-col justify-between">
-        <div className="mt-8 flex-1 overflow-y-auto">
-          <ul className="-my-6 divide-y divide-gray-200">
-            {cartCount === 0 ? (
-              <h1 className="py-6">You don&apos;t have any items</h1>
-            ) : (
-              <>
-              {Object.values(cartDetails ?? {}).map((entry) => (
+        <div className="h-full flex flex-col justify-between">
+          <div className="mt-8 flex-1 overflow-y-auto">
+            <ul className="-my-6 divide-y divide-gray-200">
+              {cartCount === 0 ? (
+                <h1 className="py-6">You don&apos;t have any items</h1>
+              ) : (
+                <>
+                  {Object.values(cartDetails ?? {}).map((entry) => (
                     <li key={entry.id} className="flex py-6">
                       <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                         <Image
-                          src={entry.image as string}
-                          alt="Product-image"
+                          src={entry.images}
+                          alt="Product image"
                           width={100}
                           height={100}
                         />
                       </div>
+
                       <div className="ml-4 flex flex-1 flex-col">
                         <div>
                           <div className="flex justify-between text-base font-medium text-gray-900">
@@ -78,13 +77,13 @@ export default function ShoppingCardModel() {
                       </div>
                     </li>
                   ))}
-              </>
-            )}
-          </ul>
-        </div>
+                </>
+              )}
+            </ul>
+          </div>
 
-         {/* totalPrice */}
-         <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
+          {/* totalPrice */}
+          <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
             <div className="flex justify-between text-base font-medium text-gray-900">
               <p>Subtotal</p>
               <p>${cartCount === 0 ? 0 : (totalPrice || 0).toFixed(2)}</p>
@@ -97,7 +96,6 @@ export default function ShoppingCardModel() {
             {/* checkoutbutton */}
             <div className="mt-6">
               <Button
-                
                 className="w-full"
                 disabled={cartCount === 0} // Disable if no items in cart
               >
@@ -118,7 +116,7 @@ export default function ShoppingCardModel() {
             </div>
           </div>
         </div>
-    </SheetContent>
-  </Sheet>
+      </SheetContent>
+    </Sheet>
   );
 }

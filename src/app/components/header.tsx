@@ -7,6 +7,7 @@ import { CiCircleAlert } from "react-icons/ci";
 import { ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useShoppingCart } from "use-shopping-cart";
+import Link from "next/link";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -77,21 +78,21 @@ export default function Navbar() {
         <div className="container mx-auto flex justify-between items-center">
           {/* Links */}
           <div className="flex space-x-6 font-thin text-gray-700">
-            <a href="/" className="hover:text-teal-600">
+            <Link href="/" className="hover:text-teal-600">
               Home
-            </a>
-            <a href="/shop" className="hover:text-teal-600">
+            </Link>
+            <Link href="/shop" className="hover:text-teal-600">
               Shop
-            </a>
-            <a href="/product" className="hover:text-teal-600">
+            </Link>
+            <Link href="/product" className="hover:text-teal-600">
               Product
-            </a>
-            <a href="/pages" className="hover:text-teal-600">
+            </Link>
+            <Link href="/pages" className="hover:text-teal-600">
               Pages
-            </a>
-            <a href="/about" className="hover:text-teal-600">
+            </Link>
+            <Link href="/about" className="hover:text-teal-600">
               About
-            </a>
+            </Link>
           </div>
           {/* contact */}
           <div className="text-gray-700">Contact: (808) 555-0111</div>
@@ -101,21 +102,21 @@ export default function Navbar() {
       {/* mobile menu */}
       {menuOpen && (
         <div className="md:hidden flex flex-col items-center bg-white py-3 space-y-2 text-gray-700">
-          <a href="/" className="hover:text-teal-600">
+          <Link href="/" className="hover:text-teal-600">
             Home
-          </a>
-          <a href="/shop" className="hover:text-teal-600">
+          </Link>
+          <Link href="/shop" className="hover:text-teal-600">
             Shop
-          </a>
-          <a href="/product" className="hover:text-teal-600">
+          </Link>
+          <Link href="/product" className="hover:text-teal-600">
             Product
-          </a>
-          <a href="/pages" className="hover:text-teal-600">
+          </Link>
+          <Link href="/pages" className="hover:text-teal-600">
          Pages
-          </a>
-          <a href="/about" className="hover:text-teal-600">
+          </Link>
+          <Link href="/about" className="hover:text-teal-600">
             About
-          </a>
+          </Link>
         </div>
       )}
     </div>

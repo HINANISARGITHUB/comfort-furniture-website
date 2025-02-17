@@ -37,7 +37,7 @@ export default async function CategoryPage({params}: {params: {category: string}
             <div key={product._id} className="group relative">
               <div className="aspect-square w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-80">
                 <Image
-                  src={urlFor(product.image).url()}
+                  src={urlFor(product.imageUrl).url()}
                   alt="product image"
                   width={300}
                   height={300}
